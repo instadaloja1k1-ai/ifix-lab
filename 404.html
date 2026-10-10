@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>iFix Lab</title>
+  <script>
+    // GitHub Pages não suporta roteamento no servidor para SPAs: quando o
+    // usuário atualiza a página ou acessa um link direto de uma rota interna
+    // (ex: /ifix-lab/ordens-servico), o GitHub serve este 404.html. Aqui a
+    // gente redireciona de volta para o index.html preservando o caminho,
+    // e um pequeno script no index.html devolve a URL original.
+    var pathSegmentsToKeep = 1 // mantém "/ifix-lab" como prefixo
+    var l = window.location
+    var redirectUrl =
+      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') +
+      '/?/' +
+      l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+      (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+      l.hash
+    window.location.replace(redirectUrl)
+  </script>
+</head>
+<body></body>
+</html>
