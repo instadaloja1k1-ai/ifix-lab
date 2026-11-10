@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  --color-base-950: #0a0a0b;
+  --color-base-900: #121214;
+  --color-base-850: #18181b;
+  --color-base-800: #1f1f23;
+  --color-base-700: #323236;
+  --color-base-600: #45454a;
+  --color-base-500: #6b6b70;
+  --color-base-400: #9a9aa0;
+  --color-base-300: #c4c4c9;
+  --color-base-200: #e2e2e5;
+  --color-base-100: #f4f4f5;
+
+  --color-accent-500: #d4a017;
+  --color-accent-400: #e6b82f;
+  --color-accent-300: #f2cc5c;
+
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-success: #22c55e;
+  --color-info: #3b82f6;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-base-950);
+  color: var(--color-base-100);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media print {
+  body {
+    background-color: #fff;
+    color: #111;
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-base-700) transparent;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-base-700);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
