@@ -64,3 +64,32 @@ export function getInitials(e) {
     .map((e) => e[0]?.toUpperCase() ?? ``)
     .join(``);
 }
+
+/**
+ * Converte o valor de um <input type="date"> ("2026-11-10") em timestamp para o banco.
+ * Grava ao meio-dia de Brasília: assim a data nunca "volta um dia" por causa do fuso
+ * (gravar só "2026-11-10" vira meia-noite UTC = 21h do dia 9 em Brasília).
+ */
+export function dateInputToISO(value) {
+  return value ? new Date(`${value}T12:00:00-03:00`).toISOString() : null;
+}
+
+/** Converte um timestamp do banco para o valor de um <input type="date">, no fuso de Brasília. */
+export function isoToDateInput(value) {
+  if (!value) return ``;
+  if (DATE_ONLY_RE.test(value)) return value;
+  const parts = new Intl.DateTimeFormat(`en-CA`, {
+    timeZone: TIMEZONE,
+    year: `numeric`,
+    month: `2-digit`,
+    day: `2-digit`,
+  }).formatToParts(new Date(value));
+  const p = {};
+  for (const x of parts) p[x.type] = x.value;
+  return `${p.year}-${p.month}-${p.day}`;
+}
+
+/** Início do dia de hoje em Brasília, como ISO (para "está atrasado?"). */
+export function startOfTodayISO() {
+  return new Date(`${todayISO()}T00:00:00-03:00`).toISOString();
+}

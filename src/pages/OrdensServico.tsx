@@ -19,7 +19,15 @@ import { EmptyState } from '../components/ui/EmptyState';
 import { Modal } from '../components/ui/Modal';
 import { PageHeader } from '../components/ui/PageHeader';
 import { useAuth } from '../contexts/AuthContext';
-import { addDaysISO, formatCurrency, formatDate, formatDateTime, todayISO } from '../lib/format';
+import {
+  addDaysISO,
+  formatCurrency,
+  formatDate,
+  formatDateTime,
+  todayISO,
+  dateInputToISO,
+  isoToDateInput,
+} from '../lib/format';
 import { ShareWithClient } from './os/ShareWithClient';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 
@@ -157,7 +165,7 @@ export function OrdensServicoPage() {
       (T(t.reported_defect ?? ``),
       k(t.priority),
       t.technician_id && j(t.technician_id),
-      t.promised_at && N(t.promised_at.slice(0, 10)));
+      t.promised_at && N(isoToDateInput(t.promised_at)));
   }
   function ve(e, t) {
     re((n) =>
@@ -220,7 +228,7 @@ export function OrdensServicoPage() {
         estimated_cost: be.cost,
         actual_cost: be.cost,
         technician_id: A || null,
-        due_at: M ? new Date(M).toISOString() : null,
+        due_at: dateInputToISO(M),
         priority: O,
         status: `recebido`,
         internal_notes: te || null,

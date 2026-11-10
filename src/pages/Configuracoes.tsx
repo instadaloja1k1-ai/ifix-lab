@@ -394,8 +394,8 @@ export function AuditTab() {
       .range(e, e + AUDIT_PAGE_SIZE - 1);
     (m !== `todos` && (n = n.eq(`entity`, m)),
       g !== `todos` && (n = n.eq(`actor_id`, g)),
-      v && (n = n.gte(`created_at`, `${v}T00:00:00`)),
-      b && (n = n.lte(`created_at`, `${b}T23:59:59`)));
+      v && (n = n.gte(`created_at`, `${v}T00:00:00-03:00`)),
+      b && (n = n.lte(`created_at`, `${b}T23:59:59-03:00`)));
     let { data: i, error: o } = await n;
     o && l(o.message);
     let c = i ?? [];

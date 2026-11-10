@@ -11,7 +11,7 @@ import {
 import { EmptyState } from '../components/ui/EmptyState';
 import { PageHeader } from '../components/ui/PageHeader';
 import { StatCard } from '../components/ui/StatCard';
-import { formatCurrency, todayISO } from '../lib/format';
+import { formatCurrency, todayISO, startOfTodayISO } from '../lib/format';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 
 export const EMPTY_STATS = {
@@ -90,7 +90,7 @@ export function DashboardPage() {
               head: true,
             })
             .in(`status`, OPEN_STATUSES)
-            .lt(`due_at`, new Date().toISOString()),
+            .lt(`due_at`, startOfTodayISO()),
           supabase.from(`service_orders`).select(`total_value`),
           supabase
             .from(`payments`)

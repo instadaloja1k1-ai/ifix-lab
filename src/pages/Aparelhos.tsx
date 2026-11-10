@@ -19,7 +19,7 @@ import { EmptyState } from '../components/ui/EmptyState';
 import { Modal } from '../components/ui/Modal';
 import { PageHeader } from '../components/ui/PageHeader';
 import { useAuth } from '../contexts/AuthContext';
-import { formatDateTime } from '../lib/format';
+import { formatDateTime, dateInputToISO, isoToDateInput } from '../lib/format';
 import { findSameDevice, ImeiHistoryModal, SameDeviceAlert } from './aparelhos/ImeiHistory';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 
@@ -682,11 +682,11 @@ export function AparelhosPage() {
           <Field label="Previsão de entrega">
             <input
               type="date"
-              value={p.promised_at ? p.promised_at.slice(0, 10) : ``}
+              value={isoToDateInput(p.promised_at)}
               onChange={(e) =>
                 m({
                   ...p,
-                  promised_at: e.target.value ? new Date(e.target.value).toISOString() : null,
+                  promised_at: dateInputToISO(e.target.value),
                 })
               }
               className={inputClass}
