@@ -464,7 +464,7 @@ export function EstoquePage() {
               />
             </Field>
           </div>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <Field label={j ? `Estoque atual (use "Ajustar")` : `Estoque inicial`}>
               <input
                 type="number"

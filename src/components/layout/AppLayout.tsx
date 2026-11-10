@@ -14,11 +14,11 @@ export function AppLayout() {
     <div className="flex min-h-screen bg-base-950">
       <Sidebar open={menuOpen} onClose={() => setMenuOpen(false)} />
       <div className="flex-1 min-w-0 flex flex-col">
-        <header className="lg:hidden sticky top-0 z-30 flex items-center gap-3 h-14 px-4 bg-base-900/95 backdrop-blur border-b border-base-800">
+        <header className="lg:hidden sticky top-0 z-30 flex items-center gap-3 min-h-14 pt-[env(safe-area-inset-top)] px-4 bg-base-900/95 backdrop-blur border-b border-base-800">
           <button
             onClick={() => setMenuOpen(true)}
             aria-label="Abrir menu"
-            className="w-9 h-9 -ml-1 rounded-lg flex items-center justify-center text-base-300 hover:bg-base-850"
+            className="w-11 h-11 -ml-2 rounded-lg flex items-center justify-center text-base-300 hover:bg-base-850"
           >
             <MenuIcon className="w-5 h-5" />
           </button>

@@ -253,7 +253,7 @@ function OrderView({
       {order.photos.length > 0 && (
         <div className="bg-base-900 border border-base-800 rounded-xl p-5">
           <p className="text-sm font-medium text-base-100 mb-3">Fotos do aparelho</p>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {order.photos.map((p) => {
               const url = supabase.storage.from(PHOTO_BUCKET).getPublicUrl(p.path).data.publicUrl;
               return (

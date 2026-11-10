@@ -88,8 +88,8 @@ export function Sidebar({ open = false, onClose = () => {} }) {
       {open && <div className="fixed inset-0 z-40 bg-black/60 lg:hidden" onClick={onClose} />}
       <aside
         className={clsx(
-          `w-64 lg:w-60 shrink-0 bg-base-900 border-r border-base-800 flex flex-col h-screen`,
-          `fixed inset-y-0 left-0 z-50 transition-transform lg:sticky lg:top-0 lg:translate-x-0`,
+          `w-64 lg:w-60 shrink-0 bg-base-900 border-r border-base-800 flex flex-col h-dvh lg:h-screen`,
+          `fixed inset-y-0 left-0 z-50 transition-transform lg:sticky lg:top-0 lg:translate-x-0 pt-[env(safe-area-inset-top)] lg:pt-0`,
           open ? `translate-x-0` : `-translate-x-full`,
         )}
       >

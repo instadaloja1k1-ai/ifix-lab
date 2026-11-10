@@ -519,7 +519,7 @@ export function FornecedoresPage() {
               />
             </Field>
           </div>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <Field label="Qualidade (1-5)">
               <input
                 type="number"
@@ -1011,7 +1011,7 @@ export function PurchaseFormModal({
               })}
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <Field label="Frete (R$)">
               <input
                 type="number"

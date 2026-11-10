@@ -1068,7 +1068,7 @@ export function OrderDetailModal({
       onClick={a}
     >
       <div
-        className="w-full max-w-2xl max-h-[92vh] overflow-y-auto bg-base-900 border border-base-800 rounded-t-2xl sm:rounded-xl shadow-2xl"
+        className="w-full max-w-2xl max-h-[92vh] max-h-[92dvh] overflow-y-auto bg-base-900 border border-base-800 rounded-t-2xl sm:rounded-xl shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-5 py-4 border-b border-base-800 sticky top-0 bg-base-900">

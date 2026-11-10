@@ -511,7 +511,7 @@ export function AparelhosPage() {
               </optgroup>
             </select>
           </Field>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <Field label="Marca">
               <input
                 value={p.brand}
@@ -552,7 +552,7 @@ export function AparelhosPage() {
               />
             </Field>
           </div>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <Field label="Cor">
               <input
                 value={p.color ?? ``}
@@ -594,7 +594,7 @@ export function AparelhosPage() {
             matches={findSameDevice(t, p, x?.id ?? null)}
             onOpenHistory={() => setImeiHistory(p.imei1 || p.imei2 || p.serial_number || '')}
           />
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <Field label="Número de série">
               <input
                 value={p.serial_number ?? ``}
