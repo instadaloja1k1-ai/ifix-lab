@@ -9,6 +9,7 @@ import {
   TrashIcon,
   TriangleAlertIcon,
   UsersIcon,
+  FileTextIcon,
 } from 'lucide-react';
 import { Badge } from '../components/ui/Badge';
 import { ConfirmDialog } from '../components/ui/ConfirmDialog';
@@ -184,7 +185,7 @@ export function ClientesPage() {
           {s}
         </div>
       )}
-      <div className="bg-base-900 border border-base-800 rounded-xl overflow-hidden">
+      <div className="bg-base-900 border border-base-800 rounded-xl overflow-x-auto">
         {a ? (
           <div className="p-6 text-sm text-base-500">Carregando…</div>
         ) : D.length === 0 ? (
@@ -214,6 +215,17 @@ export function ClientesPage() {
                   <td className="px-4 py-3">
                     <p className="text-base-100 font-medium">{e.name}</p>
                     {e.company_name && <p className="text-xs text-base-500">{e.company_name}</p>}
+                    {e.kind === `lojista` && (
+                      <a
+                        href={`${import.meta.env.BASE_URL}imprimir/extrato/${e.id}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 mt-1 text-xs text-accent-400 hover:text-accent-300"
+                      >
+                        <FileTextIcon className="w-3 h-3" />
+                        Fechamento do mês
+                      </a>
+                    )}
                   </td>
                   <td className="px-4 py-3">
                     <Badge tone={e.kind === `lojista` ? `accent` : `default`}>

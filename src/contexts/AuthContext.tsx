@@ -12,6 +12,7 @@ export interface Profile {
   role: Role;
   active: boolean;
   cpf: string | null;
+  commission_percent?: number;
   [key: string]: unknown;
 }
 

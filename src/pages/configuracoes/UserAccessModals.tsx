@@ -139,7 +139,7 @@ export function NewUserModal({ onClose, onSaved }: { onClose: () => void; onSave
   );
 }
 
-/** Administrador define/corrige o CPF e redefine o PIN de um usuário existente. */
+/** Administrador edita nome, telefone, comissão, CPF e PIN de um usuário existente. */
 export function UserAccessModal({
   user,
   onClose,
@@ -149,6 +149,9 @@ export function UserAccessModal({
   onClose: () => void;
   onSaved: () => void;
 }) {
+  const [fullName, setFullName] = useState(user.full_name ?? '');
+  const [phone, setPhone] = useState((user.phone as string) ?? '');
+  const [commission, setCommission] = useState(String(user.commission_percent ?? 0));
   const [cpf, setCpf] = useState(user.cpf ?? '');
   const [pin, setPin] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -158,11 +161,27 @@ export function UserAccessModal({
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
+    if (!fullName.trim()) return setError('Informe o nome.');
+    const commissionValue = Number(commission.replace(',', '.'));
+    if (!Number.isFinite(commissionValue) || commissionValue < 0 || commissionValue > 100)
+      return setError('A comissão precisa ser um número entre 0 e 100.');
     if (!isValidCpf(cpf)) return setError('CPF inválido.');
     if (!user.cpf && !pin) return setError('Defina também um PIN para o primeiro acesso.');
     if (pin && !isValidPin(pin)) return setError('O PIN precisa ter 4 números.');
-    if (!cpfChanged && !pin) return onClose();
     setSaving(true);
+
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .update({
+        full_name: fullName.trim(),
+        phone: phone.trim() || null,
+        commission_percent: commissionValue,
+      })
+      .eq('id', user.id);
+    if (profileError) {
+      setSaving(false);
+      return setError(profileError.message);
+    }
     if (cpfChanged) {
       const { error } = await supabase.rpc('admin_set_user_cpf', {
         p_user_id: user.id,
@@ -188,8 +207,33 @@ export function UserAccessModal({
   }
 
   return (
-    <Modal open onClose={onClose} title={`Acesso — ${user.full_name}`} width="md">
+    <Modal open onClose={onClose} title={`Editar usuário — ${user.full_name}`} width="md">
       <form onSubmit={handleSubmit} className="space-y-4">
+        <Field label="Nome completo">
+          <input
+            className={inputClass}
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            autoFocus
+          />
+        </Field>
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Telefone">
+            <input
+              className={inputClass}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </Field>
+          <Field label="Comissão (%)" hint="Sobre a mão de obra das OS entregues.">
+            <input
+              className={inputClass}
+              inputMode="decimal"
+              value={commission}
+              onChange={(e) => setCommission(e.target.value)}
+            />
+          </Field>
+        </div>
         <Field label="CPF (usado no login)">
           <input
             className={inputClass}
@@ -197,7 +241,6 @@ export function UserAccessModal({
             value={formatCpf(cpf)}
             onChange={(e) => setCpf(onlyDigits(e.target.value).slice(0, 11))}
             placeholder="000.000.000-00"
-            autoFocus
           />
         </Field>
         <Field

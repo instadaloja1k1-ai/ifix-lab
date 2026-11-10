@@ -20,6 +20,7 @@ import { Modal } from '../components/ui/Modal';
 import { PageHeader } from '../components/ui/PageHeader';
 import { useAuth } from '../contexts/AuthContext';
 import { addDaysISO, formatCurrency, formatDate, formatDateTime, todayISO } from '../lib/format';
+import { ShareWithClient } from './os/ShareWithClient';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 
 export const inputClass = `w-full bg-base-850 border border-base-700 rounded-lg px-3 py-2 text-sm text-base-100 outline-none focus:border-accent-500 transition-colors`;
@@ -112,6 +113,8 @@ export function OrdensServicoPage() {
       l = [e, t, r, a, s].find((e) => e.error);
     (l?.error && m(l.error.message),
       n(e.data ?? []),
+      // Mantém a OS aberta no modal sincronizada com o banco (status, resposta do cliente…).
+      le((cur) => (cur ? ((e.data ?? []).find((o) => o.id === cur.id) ?? cur) : cur)),
       i(t.data ?? []),
       o(r.data ?? []),
       c(a.data ?? []),
@@ -355,7 +358,7 @@ export function OrdensServicoPage() {
           {p}
         </div>
       )}
-      <div className="bg-base-900 border border-base-800 rounded-xl overflow-hidden">
+      <div className="bg-base-900 border border-base-800 rounded-xl overflow-x-auto">
         {d ? (
           <div className="p-6 text-sm text-base-500">Carregando…</div>
         ) : he.length === 0 ? (
@@ -1051,11 +1054,11 @@ export function OrderDetailModal({
   }
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/60"
       onClick={a}
     >
       <div
-        className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-base-900 border border-base-800 rounded-xl shadow-2xl"
+        className="w-full max-w-2xl max-h-[92vh] overflow-y-auto bg-base-900 border border-base-800 rounded-t-2xl sm:rounded-xl shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-5 py-4 border-b border-base-800 sticky top-0 bg-base-900">
@@ -1081,6 +1084,7 @@ export function OrderDetailModal({
           </div>
         </div>
         <div className="p-5 space-y-5">
+          <ShareWithClient order={{ ...e, total_value: c.total_value }} client={t} device={n} />
           <div className="grid grid-cols-2 gap-3 text-sm">
             <InfoItem
               label="Aparelho"

@@ -4,6 +4,7 @@ import { AppLayout } from './components/layout/AppLayout';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { RequireModule } from './components/RequireModule';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { AcompanharPage } from './pages/Acompanhar';
 import { AparelhosPage } from './pages/Aparelhos';
 import { ClientesPage } from './pages/Clientes';
 import { ConfiguracoesPage } from './pages/Configuracoes';
@@ -11,6 +12,7 @@ import { DashboardPage } from './pages/Dashboard';
 import { EstoquePage } from './pages/Estoque';
 import { FinanceiroPage } from './pages/Financeiro';
 import { FornecedoresPage } from './pages/Fornecedores';
+import { ImprimirExtratoPage } from './pages/ImprimirExtrato';
 import { ImprimirOSPage } from './pages/ImprimirOS';
 import { LoginPage } from './pages/Login';
 import { OrdensServicoPage } from './pages/OrdensServico';
@@ -24,6 +26,15 @@ export function AppRoutes() {
   ) : (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/acompanhar/:token" element={<AcompanharPage />} />
+      <Route
+        path="/imprimir/extrato/:clientId"
+        element={
+          <ProtectedRoute>
+            <ImprimirExtratoPage />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/imprimir/os/:id"
         element={

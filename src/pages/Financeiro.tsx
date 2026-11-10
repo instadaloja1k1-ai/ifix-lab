@@ -253,7 +253,7 @@ export function FinanceiroPage() {
           Contas a pagar
         </button>
       </div>
-      <div className="bg-base-900 border border-base-800 rounded-xl overflow-hidden">
+      <div className="bg-base-900 border border-base-800 rounded-xl overflow-x-auto">
         {y ? (
           <div className="p-6 text-sm text-base-500">Carregando…</div>
         ) : t === `receber` ? (

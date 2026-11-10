@@ -176,7 +176,7 @@ export function UsersTab({ myProfileId }) {
           {error}
         </div>
       )}
-      <div className="bg-base-900 border border-base-800 rounded-xl overflow-hidden">
+      <div className="bg-base-900 border border-base-800 rounded-xl overflow-x-auto">
         {loading ? (
           <div className="p-6 text-sm text-base-500">Carregando…</div>
         ) : users.length === 0 ? (
@@ -203,6 +203,11 @@ export function UsersTab({ myProfileId }) {
                   >
                     <td className="px-4 py-3">
                       <p className="text-base-100 font-medium">{u.full_name}</p>
+                      {Number(u.commission_percent) > 0 && (
+                        <p className="text-xs text-base-500">
+                          Comissão {Number(u.commission_percent)}%
+                        </p>
+                      )}
                       {isMe && <p className="text-xs text-base-500">Você</p>}
                     </td>
                     <td className="px-4 py-3">
@@ -262,7 +267,7 @@ export function UsersTab({ myProfileId }) {
                         className="inline-flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg border border-base-700 text-base-300 hover:border-accent-500/50 hover:text-accent-300"
                       >
                         <KeyRoundIcon className="w-3.5 h-3.5" />
-                        {u.cpf ? `CPF / PIN` : `Definir acesso`}
+                        {u.cpf ? `Editar` : `Definir acesso`}
                       </button>
                     </td>
                   </tr>
@@ -316,7 +321,7 @@ export function PermissionsTab() {
           </div>
         ))}
       </div>
-      <div className="bg-base-900 border border-base-800 rounded-xl overflow-hidden overflow-x-auto">
+      <div className="bg-base-900 border border-base-800 rounded-xl overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="text-left text-xs text-base-500 border-b border-base-800">
@@ -438,7 +443,7 @@ export function AuditTab() {
           {c}
         </div>
       )}
-      <div className="bg-base-900 border border-base-800 rounded-xl overflow-hidden">
+      <div className="bg-base-900 border border-base-800 rounded-xl overflow-x-auto">
         {i ? (
           <div className="p-6 text-sm text-base-500">Carregando…</div>
         ) : n.length === 0 ? (

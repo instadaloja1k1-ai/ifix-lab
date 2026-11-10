@@ -239,7 +239,7 @@ export function FornecedoresPage() {
               />
             </div>
           </div>
-          <div className="bg-base-900 border border-base-800 rounded-xl overflow-hidden">
+          <div className="bg-base-900 border border-base-800 rounded-xl overflow-x-auto">
             {d ? (
               <div className="p-6 text-sm text-base-500">Carregando…</div>
             ) : ie.length === 0 ? (
@@ -313,7 +313,7 @@ export function FornecedoresPage() {
           </div>
         </>
       ) : (
-        <div className="bg-base-900 border border-base-800 rounded-xl overflow-hidden">
+        <div className="bg-base-900 border border-base-800 rounded-xl overflow-x-auto">
           {d ? (
             <div className="p-6 text-sm text-base-500">Carregando…</div>
           ) : s.length === 0 ? (

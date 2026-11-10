@@ -21,11 +21,11 @@ export function Modal({ open: e, onClose: t, title: n, children: r, width: i = `
     }, [e, t]),
     e ? (
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60"
+        className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/60"
         onClick={t}
       >
         <div
-          className={`w-full ${MODAL_WIDTHS[i]} max-h-[90vh] overflow-y-auto bg-base-900 border border-base-800 rounded-xl shadow-2xl`}
+          className={`w-full ${MODAL_WIDTHS[i]} max-h-[92vh] overflow-y-auto bg-base-900 border border-base-800 rounded-t-2xl sm:rounded-xl shadow-2xl`}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex items-center justify-between px-5 py-4 border-b border-base-800 sticky top-0 bg-base-900">

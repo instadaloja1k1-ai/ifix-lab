@@ -44,6 +44,21 @@ Desde a versão 1.1, cada pessoa entra com **CPF + PIN de 4 números**.
 torna adivinhar o PIN lento, mas não impossível. Não use PINs óbvios (1234, 0000, data de nascimento) e desative quem
 sair da empresa.
 
+## Recursos da versão 1.2
+
+- **Versão celular + app instalável (PWA):** menu em gaveta no celular; no Chrome/Safari use "Adicionar à tela inicial".
+- **Link de acompanhamento da OS** (`/acompanhar/<token>`): o cliente vê status, orçamento, fotos, histórico e
+  garantia, e pode **aprovar ou recusar o orçamento** quando a OS está em "Aguardando aprovação". Aprovou →
+  "Reparo aprovado"; recusou → "Sem reparo". Tudo fica no histórico da OS.
+- **Botão WhatsApp na OS:** abre o WhatsApp do cliente com uma mensagem pronta para o status atual + o link.
+- **Fechamento mensal do lojista:** link "Fechamento do mês" em Clientes (só lojistas) → extrato imprimível/PDF.
+- **Histórico por IMEI/série:** botão em Aparelhos + aviso automático no cadastro quando o IMEI já é conhecido.
+- **Margem por OS e comissão por técnico:** seção nova em Relatórios; o % de comissão de cada técnico fica em
+  Configurações → Usuários → Editar.
+- **Ping diário** (`.github/workflows/manter-supabase-ativo.yml`, na branch `main`) para o Supabase gratuito não pausar.
+
+Banco: `supabase/migrations/0005_acompanhamento_comissao.sql`.
+
 ## Sobre este código-fonte
 
 O código-fonte original se perdeu. Este projeto foi **reconstruído a partir da versão publicada** em 10/11/2026:

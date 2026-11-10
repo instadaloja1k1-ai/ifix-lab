@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { formatCurrency, formatDate, formatDateTime } from '../lib/format';
 import { supabase } from '../lib/supabase';
+import { trackingUrl } from '../lib/tracking';
 import { OS_STATUS_LABELS } from './OrdensServico';
 
 export function ImprimirOSPage() {
@@ -97,6 +98,12 @@ export function ImprimirOSPage() {
           <p className="font-medium">{formatDate(t.due_at)}</p>
         </div>
       </div>
+      {t.public_token && (
+        <div className="mb-6 text-sm border border-gray-200 rounded-lg p-3">
+          <p className="text-gray-500">Acompanhe o reparo pela internet</p>
+          <p className="font-mono text-xs break-all">{trackingUrl(t.public_token)}</p>
+        </div>
+      )}
       <div className="mb-6">
         <p className="text-gray-500 text-sm mb-1">Defeito relatado</p>
         <p className="text-sm border border-gray-200 rounded-lg p-3">{t.reported_defect || `—`}</p>

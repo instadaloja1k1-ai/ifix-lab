@@ -1,0 +1,16 @@
+{
+  "name": "iFix Lab — Gestão",
+  "short_name": "iFix Lab",
+  "description": "Sistema de gestão do laboratório iFix Lab",
+  "lang": "pt-BR",
+  "start_url": "/ifix-lab/",
+  "scope": "/ifix-lab/",
+  "display": "standalone",
+  "background_color": "#0a0a0b",
+  "theme_color": "#121214",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

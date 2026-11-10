@@ -22,6 +22,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import { ProdutividadeSection } from './relatorios/Produtividade';
 import { EmptyState } from '../components/ui/EmptyState';
 import { PageHeader } from '../components/ui/PageHeader';
 import { StatCard } from '../components/ui/StatCard';
@@ -319,7 +320,7 @@ export function RelatoriosPage() {
               </div>
             </div>
           </div>
-          <div className="bg-base-900 border border-base-800 rounded-xl overflow-hidden">
+          <div className="bg-base-900 border border-base-800 rounded-xl overflow-x-auto">
             <div className="px-4 py-3 border-b border-base-800 flex items-center gap-2">
               <TrophyIcon className="w-4 h-4 text-accent-400" />
               <p className="text-sm font-medium text-base-200">
@@ -357,10 +358,10 @@ export function RelatoriosPage() {
               </table>
             )}
           </div>
+          <ProdutividadeSection />
           <p className="text-xs text-base-500 mt-4">
             Faturamento considera o valor total de todas as OS criadas no período (independente do
             status). Lucro é estimado como faturamento menos o custo real das peças lançadas.
-            Exportação (PDF/planilha) e filtros por técnico/categoria entram em uma próxima etapa.
           </p>
         </>
       )}

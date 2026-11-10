@@ -58,3 +58,19 @@ body {
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* Celular: tabelas largas rolam para o lado em vez de espremer as colunas. */
+@media (max-width: 1023px) {
+  .overflow-x-auto > table {
+    min-width: 680px;
+  }
+}
+
+/* Evita zoom automático do iPhone ao tocar em campos com fonte menor que 16px. */
+@media (max-width: 639px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}

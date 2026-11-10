@@ -11,6 +11,7 @@ import {
   TriangleAlertIcon,
   UploadIcon,
   XIcon,
+  HistoryIcon,
 } from 'lucide-react';
 import { Badge } from '../components/ui/Badge';
 import { ConfirmDialog } from '../components/ui/ConfirmDialog';
@@ -19,6 +20,7 @@ import { Modal } from '../components/ui/Modal';
 import { PageHeader } from '../components/ui/PageHeader';
 import { useAuth } from '../contexts/AuthContext';
 import { formatDateTime } from '../lib/format';
+import { findSameDevice, ImeiHistoryModal, SameDeviceAlert } from './aparelhos/ImeiHistory';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 
 export const inputClass = `w-full bg-base-850 border border-base-700 rounded-lg px-3 py-2 text-sm text-base-100 outline-none focus:border-accent-500 transition-colors`;
@@ -106,6 +108,7 @@ export function AparelhosPage() {
     [te, F] = useState(null),
     [ne, re] = useState(null),
     ie = useRef(null);
+  const [imeiHistory, setImeiHistory] = useState(null);
   useEffect(() => {
     isSupabaseConfigured ? ae() : o(false);
   }, []);
@@ -328,15 +331,26 @@ export function AparelhosPage() {
         title="Aparelhos"
         description="Cadastro de aparelhos recebidos, vinculados a um cliente, com inspeção de entrada."
         action={
-          <button
-            onClick={le}
-            disabled={r.length === 0}
-            title={r.length === 0 ? `Cadastre um cliente antes de receber um aparelho` : undefined}
-            className="flex items-center gap-1.5 text-sm bg-accent-500 text-base-950 font-medium px-3 py-1.5 rounded-lg hover:bg-accent-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <PlusIcon className="w-4 h-4" />
-            {' Novo aparelho'}
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setImeiHistory('')}
+              className="flex items-center gap-1.5 text-sm border border-base-700 text-base-300 px-3 py-1.5 rounded-lg hover:border-accent-500/50 hover:text-accent-300 transition-colors"
+            >
+              <HistoryIcon className="w-4 h-4" />
+              {' Histórico por IMEI'}
+            </button>
+            <button
+              onClick={le}
+              disabled={r.length === 0}
+              title={
+                r.length === 0 ? `Cadastre um cliente antes de receber um aparelho` : undefined
+              }
+              className="flex items-center gap-1.5 text-sm bg-accent-500 text-base-950 font-medium px-3 py-1.5 rounded-lg hover:bg-accent-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <PlusIcon className="w-4 h-4" />
+              {' Novo aparelho'}
+            </button>
+          </div>
         }
       />
       {r.length === 0 && !a && (
@@ -361,7 +375,7 @@ export function AparelhosPage() {
           {s}
         </div>
       )}
-      <div className="bg-base-900 border border-base-800 rounded-xl overflow-hidden">
+      <div className="bg-base-900 border border-base-800 rounded-xl overflow-x-auto">
         {a ? (
           <div className="p-6 text-sm text-base-500">Carregando…</div>
         ) : se.length === 0 ? (
@@ -576,6 +590,10 @@ export function AparelhosPage() {
               />
             </Field>
           </div>
+          <SameDeviceAlert
+            matches={findSameDevice(t, p, x?.id ?? null)}
+            onOpenHistory={() => setImeiHistory(p.imei1 || p.imei2 || p.serial_number || '')}
+          />
           <div className="grid grid-cols-3 gap-3">
             <Field label="Número de série">
               <input
@@ -743,6 +761,9 @@ export function AparelhosPage() {
           </div>
         </form>
       </Modal>
+      {imeiHistory !== null && (
+        <ImeiHistoryModal initialQuery={imeiHistory} onClose={() => setImeiHistory(null)} />
+      )}
       <ConfirmDialog
         open={!!C}
         title="Excluir aparelho"
