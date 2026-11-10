@@ -29,6 +29,7 @@ import {
   isoToDateInput,
 } from '../lib/format';
 import { ShareWithClient } from './os/ShareWithClient';
+import { OpenOrdersSummary } from './os/OpenOrdersSummary';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 
 export const inputClass = `w-full bg-base-850 border border-base-700 rounded-lg px-3 py-2 text-sm text-base-100 outline-none focus:border-accent-500 transition-colors`;
@@ -338,6 +339,7 @@ export function OrdensServicoPage() {
           Cadastre um aparelho em "Aparelhos" antes de abrir a primeira ordem de serviço.
         </div>
       )}
+      {!d && t.length > 0 && <OpenOrdersSummary orders={t} />}
       <div className="flex gap-2 mb-4">
         <div className="relative flex-1 max-w-sm">
           <SearchIcon className="w-4 h-4 text-base-500 absolute left-3 top-1/2 -translate-y-1/2" />
